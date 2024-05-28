@@ -1,0 +1,1 @@
+{"version":3,"file":"FormatDisplay.d.ts","sourceRoot":"","sources":["../../src/FormatDisplay.ts"],"names":[],"mappings":"AACA,cAAM,aAAa;IACjB,KAAK,EAAE,MAAM,CAAC;gBACF,KAAK,EAAE,UAAU;IAI7B,mBAAmB;IAenB,eAAe,CAAC,MAAM,EAAE,MAAM;IAI9B,mBAAmB,CAAC,QAAQ,EAAE,MAAM;CAUrC;AAED,eAAe,aAAa,CAAC"}
