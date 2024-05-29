@@ -1,9 +1,11 @@
 import { Numberable } from "../types";
+import ensureAFloat from "./utils/ensureAFloat";
 
-class FormatDisplay {
+class FormatDisplay extends String {
   value: string;
   constructor(value: Numberable) {
-    this.value = value.toString().trim();
+    super(ensureAFloat(value));
+    this.value = ensureAFloat(value);
   }
 
   removeTrailingZeros() {

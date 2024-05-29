@@ -7,7 +7,7 @@ import signs from "./utils/signs";
 interface IFormatOptions {
   keepZeros: boolean;
   limits: number;
-  maximumDecimals:number
+  maximumDecimals: number
 }
 /**
  * Format is the abstracted formatter of things
@@ -16,7 +16,8 @@ class Format extends FormatDisplay {
   locale: FormatLocale;
   constructor(value: Numberable,  onlyAbbreviateAt: number) {
     super(value);
-    this.locale = new FormatLocale(value, onlyAbbreviateAt.toString().length);
+
+    this.locale = new FormatLocale(value, onlyAbbreviateAt);
   }
 
   _format(options?: Partial<IFormatOptions>) {
@@ -29,34 +30,63 @@ class Format extends FormatDisplay {
     }
     if (options?.maximumDecimals) {
       const dec = value = this.value.split(".")[1] || "";
-      return `${this.value.split(".")[0]}.${dec.slice(0,options?.maximumDecimals || 0 )}`;
+      value = `${this.value.split(".")[0]}.${dec.slice(0,options?.maximumDecimals || 0 )}`;
     }
-    return value;
+    return this.sameClass(value);
   }
 
   format(keepZeros: boolean, limits: number, maximumDecimals?:number) {
     return this._format({ keepZeros, limits, maximumDecimals });
   }
 
-  abbreviate(full = true, decimals?: number, cut=false) {
+  abbreviate(full = true) {
     const layers = this.locale.layers.bind(this.locale)() as number;
     const sign = signs.getSign(layers, full);
     const value = formatUnits(this.locale.whole, 3 * layers);
-    return `${this.locale.defaultDecimalCount(value, decimals, cut)} ${sign}`;
+    return [value, sign];
   }
 
-  static format(value: Numberable, onlyAbbreviateAt: number, options: Partial<IFormatOptions>): string;
-  static format(value: Numberable, onlyAbbreviateAt: number, keepZeros:boolean, limits:number, maximumDecimals:number):string;
+
+  sameClass(value:Numberable) {
+    return new Format(value, this.locale.lengthToAbbreviate);
+  }
+
+  static format(value: Numberable, onlyAbbreviateAt: number, options: Partial<IFormatOptions>):Format;
+  static format(value: Numberable, onlyAbbreviateAt: number, keepZeros:boolean, limits:number, maximumDecimals:number):Format;
   static format(value: Numberable,
     onlyAbbreviateAt: number,
-    ...args: [keepZeros: boolean, limits: number, maximumDecimals:number] | [options: Partial<IFormatOptions>]): string { 
+    ...args: [keepZeros: boolean, limits: number, maximumDecimals:number] | [options: Partial<IFormatOptions>]):Format { 
     const formatter = new Format(value, onlyAbbreviateAt)
     if (typeof args[0] === "object") {
       return formatter._format(args[0] as Partial<IFormatOptions>)
     } else {
       return formatter.format(...args)
     }
+  }
+  
+  defaultDecimalCount(value:string, decimals=0,) {
+    const splitted = value.split(".");
+    let virtual = splitted[1] || "";
+    let decimalsToGenerate = 0;
+    if (splitted[1] && decimals) {
+      if (splitted[1].length < decimals) {
+        decimalsToGenerate = decimals - splitted[1].length
+      }
+    } 
+    for (var i = 0; i < decimalsToGenerate; i++) {
+      virtual += "0"
     }
+    splitted[1] = virtual;
+    return this.sameClass(splitted.join("."));
+  }
+
+  withCommas() {
+    const whole = this.locale.whole;
+    const bigint = BigInt(whole);
+    return `${bigint.toLocaleString()}${this.locale.decimals}`;
+
+  }
+
 }
 
 export default Format;

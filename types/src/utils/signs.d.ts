@@ -1,3 +1,6 @@
+/**
+ * get the signs for the balance of token display
+ */
 declare const signs: {
     thousand: string;
     million: string;
