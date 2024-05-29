@@ -39,10 +39,11 @@ class Format extends FormatDisplay {
     return this._format({ keepZeros, limits, maximumDecimals });
   }
 
-  abbreviate(full = true) {
-    const layers = this.locale.layers.bind(this.locale)() as number;
+  abbreviate(full = true):[Format, string] {
+    const layers = this.locale.layers() as number;
     const sign = signs.getSign(layers, full);
-    const value = formatUnits(this.locale.whole, 3 * layers);
+    const value = this.sameClass(formatUnits(this.locale.whole, 3 * layers));
+    console.log(sign, layers, sign)
     return [value, sign];
   }
 
@@ -83,7 +84,8 @@ class Format extends FormatDisplay {
   withCommas() {
     const whole = this.locale.whole;
     const bigint = BigInt(whole);
-    return `${bigint.toLocaleString()}${this.locale.decimals}`;
+    console.log(bigint.toLocaleString())
+    return `${whole.replace(/\B(?=(\d{3})+(?!\d))/g, ',')}${this.locale.decimals}`;
 
   }
 

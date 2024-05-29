@@ -2,7 +2,7 @@ import { Numberable } from "../types";
 /**
  * FormatLocal: abbreviates the value
  */
-declare class FormatLocale {
+declare class FormatLocale extends String {
     value: string;
     lengthToAbbreviate: number;
     splitted: string[];
@@ -16,7 +16,6 @@ declare class FormatLocale {
      */
     doesNeedAbbreviation(value: string): boolean;
     layers(): number;
-    defaultDecimalCount(value: string, decimals?: number, cut?: boolean): string;
 }
 export default FormatLocale;
 //# sourceMappingURL=FormatLocale.d.ts.map

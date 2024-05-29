@@ -1,5 +1,5 @@
 import { Numberable } from "../types";
-declare class FormatDisplay {
+declare class FormatDisplay extends String {
     value: string;
     constructor(value: Numberable);
     removeTrailingZeros(): string;
