@@ -5,7 +5,7 @@ declare class BaseFormat {
     constructor(value: Numberable, zeros?: string);
     get value(): string;
     removeTrailingZeros(full?: boolean): BaseFormat;
-    abbreviateRaw(placeValue?: number, max?: number): [string, number];
+    abbreviateRaw(placeValue?: number, max?: number): [BaseFormat, number];
     addCommas(): BaseFormat;
 }
 export default function formatter(value: Numberable, zeros?: string): BaseFormat;
