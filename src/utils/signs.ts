@@ -14,7 +14,7 @@ const signs = {
     obj.million = "Million";
     obj.billion = "Billion";
     obj.trillion = "Trillion";
-    return obj;
+    return obj as typeof signs;
   },
 
   getSign(layer: number, full:boolean=false) {
