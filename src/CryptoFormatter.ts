@@ -19,7 +19,8 @@ class BaseFormat {
   }
 
   abbreviateRaw(placeValue?:number, max?:number) {
-    return getAbbr(this.value, max, placeValue);
+    const [value, layer] = getAbbr(this.value, max, placeValue);
+    return [(new BaseFormat(value)), layer] as [BaseFormat, number];
   }
 
   addCommas() {
