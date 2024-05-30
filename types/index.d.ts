@@ -1,10 +1,7 @@
 import floatable from "./src/utils/floatable";
-import FormatDisplay from "./src/FormatDisplay";
-import FormatLocale from "./src/FormatLocale";
-import Formatter from "./src/Formatter";
 import ensureFloat from "./src/utils/ensureFloat";
-declare const cryptoNumbers: {
-    floatable: typeof floatable;
+import formatter from "./src/CryptoFormatter";
+declare const cryptoFormatter: {
     signs: {
         thousand: string;
         million: string;
@@ -13,10 +10,9 @@ declare const cryptoNumbers: {
         readonly full: any;
         getSign(layer: number, full?: boolean): string;
     };
-    FormatDisplay: typeof FormatDisplay;
-    FormatLocale: typeof FormatLocale;
-    Formatter: typeof Formatter;
+    floatable: typeof floatable;
     ensureFloat: typeof ensureFloat;
+    formatter: typeof formatter;
 };
-export default cryptoNumbers;
+export default cryptoFormatter;
 //# sourceMappingURL=index.d.ts.map
