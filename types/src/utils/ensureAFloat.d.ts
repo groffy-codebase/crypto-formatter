@@ -1,3 +1,3 @@
 import { Numberable } from "../../types";
-export default function ensureAFloat(_value: Numberable): string;
-//# sourceMappingURL=ensureAFloat.d.ts.map
+export default function ensureFloat(_value: Numberable): string;
+//# sourceMappingURL=ensureFloat.d.ts.map

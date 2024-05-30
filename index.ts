@@ -1,16 +1,14 @@
-import floatable from "./src/utils/floatable";
+import { Numberable } from "./types";
 import signs from "./src/utils/signs";
-import FormatDisplay from "./src/FormatDisplay";
-import FormatLocale from "./src/FormatLocale";
-import Formatter from "./src/Formatter";
-import ensureAFloat from "./src/utils/ensureAFloat";
+import floatable from "./src/utils/floatable";
+import ensureFloat from "./src/utils/ensureFloat";
+import formatter from "./src/CryptoFormatter";
 
-const cryptoNumbers = {
-  floatable, 
+const cryptoFormatter = {
   signs,
-  FormatDisplay,
-  FormatLocale,
-  Formatter: Formatter,
-  ensureAFloat
+  floatable,
+  ensureFloat,
+  formatter
 }
-export default cryptoNumbers;
+
+export default cryptoFormatter;
