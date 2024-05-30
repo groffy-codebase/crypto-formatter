@@ -1,30 +1,39 @@
 {
-	"devDependencies": {
-		"@types/node": "^20.12.12",
-		"@types/ws": "^8.5.10",
-		"ts-node": "^10.9.2",
-		"typescript": "^5.4.5",
-		"vitest": "^1.6.0"
-	},
-	"name": "crypto-numbers",
-	"version": "0.0.0",
-	"description": "A crypto number formatter",
-	"main": "src/index.js",
-	"types": "./types/",
-	"scripts": {
-		"test": "vitest"
-	},
-	"keywords": [
-		"crypto",
-		"bigint",
-		"ethers",
-		"formatter",
-		"format",
-		"string"
-	],
-	"author": "",
-	"license": "GPL-3.0",
-	"dependencies": {
-		"ethers": "^6.12.1"
-	}
+  "devDependencies": {
+    "@commitlint/cli": "^19.3.0",
+    "@commitlint/config-conventional": "^19.2.2",
+    "@types/node": "^20.12.12",
+    "@types/ws": "^8.5.10",
+    "husky": "^9.0.11",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.4.5",
+    "vitest": "^1.6.0"
+  },
+  "name": "crypto-numbers",
+  "version": "0.0.0",
+  "description": "A crypto number formatter",
+  "main": "build/",
+	"module": "build/es/",
+  "types": "./types/",
+  "scripts": {
+    "test": "vitest",
+    "prepare": "husky",
+    "build:common": "yarn tsc -p tsconfig.json --outDir ./build --module commonjs --emitDeclarationOnly false",
+    "build:es": "yarn tsc -p tsconfig.json --outDir ./build/es --module esNext --emitDeclarationOnly false --moduleResolution nodeNext --module nodeNext",
+    "build": "yarn build:es && yarn build:common"
+  },
+  "keywords": [
+    "crypto",
+    "bigint",
+    "ethers",
+    "formatter",
+    "format",
+    "string"
+  ],
+	
+  "author": "",
+  "license": "GPL-3.0",
+  "dependencies": {
+    "ethers": "^6.12.1"
+  }
 }
