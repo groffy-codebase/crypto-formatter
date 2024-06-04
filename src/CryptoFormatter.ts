@@ -6,13 +6,12 @@ import splitter from "./utils/splitter";
 
 class BaseFormat {
   splitted: ReturnType<typeof splitter>;
+  value = "";
   constructor(value: Numberable, zeros?: string) {
     this.splitted = splitter(value, zeros);
+    this.value = value.toString();
   }
   // the value of the data 
-  get value() {
-    return this.splitted.value;
-  }
 
   removeTrailingZeros(full?:boolean) {
     return new BaseFormat(removeTrailingZeros(this.value,full))
